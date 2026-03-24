@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chuyên đề Tin học trẻ – Lào Cai Lớp 10</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=IBM+Plex+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #0e0f12;
+  --bg2:     #141519;
+  --bg3:     #1a1b21;
+  --surface: #1e2029;
+  --border:  #2a2c36;
+  --text:    #e8e6df;
+  --muted:   #7a7870;
+  --cream:   #f0ede4;
+
+  --c1: #f0a500;   /* amber  – Toán số học */
+  --c2: #4fc3a1;   /* teal   – Tìm kiếm    */
+  --c3: #e8695a;   /* coral  – Mảng/Chuỗi  */
+  --c4: #7c9ef8;   /* blue   – QHD         */
+  --c5: #b07de8;   /* purple – Tham lam     */
+  --c6: #4bb8c9;   /* cyan   – Đồ thị      */
+  --c7: #e87c8a;   /* pink   – CTDL        */
+
+  --font-display: 'Playfair Display', serif;
+  --font-body:    'Plus Jakarta Sans', sans-serif;
+  --font-mono:    'IBM Plex Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 15px; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.75;
+  min-height: 100vh;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  position: fixed; left: 0; top: 0; bottom: 0;
+  width: 240px;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  overflow-y: auto; z-index: 200;
+}
+.sidebar-top {
+  padding: 28px 22px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-badge {
+  font-family: var(--font-mono);
+  font-size: 9px; font-weight: 600;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.sidebar-title {
+  font-family: var(--font-display);
+  font-size: 18px; font-weight: 900;
+  color: var(--cream);
+  line-height: 1.2;
+}
+.sidebar-subtitle { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+.nav-section {
+  padding: 16px 0 0;
+}
+.nav-label {
+  font-family: var(--font-mono);
+  font-size: 9px; font-weight: 600;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--muted);
+  padding: 0 22px 6px;
+}
+nav a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 22px;
+  font-size: 12.5px; font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all .15s;
+}
+nav a:hover { color: var(--cream); background: rgba(255,255,255,.03); }
+nav a.active { color: var(--cream); border-left-color: var(--accent,#f0a500); background: rgba(255,255,255,.04); }
+nav a .dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent, #f0a500);
+  flex-shrink: 0; opacity: .6;
+}
+nav a.active .dot { opacity: 1; }
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px 22px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 10px; color: var(--muted);
+}
+
+/* ── MAIN ── */
+main { margin-left: 240px; }
+
+/* ── HERO ── */
+.hero {
+  padding: 72px 64px 56px;
+  border-bottom: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 700px 400px at 80% 50%, rgba(240,165,0,.06), transparent);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--c1); margin-bottom: 20px;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 24px; height: 1px; background: var(--c1);
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 5vw, 70px);
+  font-weight: 900; line-height: 1.0;
+  color: var(--cream);
+  letter-spacing: -.02em;
+  margin-bottom: 6px;
+}
+.hero h1 .accent { color: var(--c1); font-style: italic; }
+.hero-sub {
+  font-size: 16px; color: var(--muted);
+  max-width: 580px; margin: 16px 0 32px;
+  line-height: 1.6;
+}
+.hero-chips { display: flex; gap: 10px; flex-wrap: wrap; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 12px; font-weight: 500;
+  color: var(--muted);
+  background: var(--surface);
+}
+.chip .c { width: 6px; height: 6px; border-radius: 50%; }
+.hero-stats {
+  display: flex; gap: 40px;
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+.stat { display: flex; flex-direction: column; gap: 2px; }
+.stat-n {
+  font-family: var(--font-display);
+  font-size: 32px; font-weight: 900;
+  color: var(--cream); line-height: 1;
+}
+.stat-l { font-size: 11px; color: var(--muted); font-weight: 500; }
+
+/* ── CHAPTER ── */
+.chapter {
+  padding: 56px 64px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  scroll-margin-top: 0;
+}
+.chapter::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--accent);
+}
+
+.chapter-head {
+  display: flex; align-items: flex-start; gap: 20px;
+  margin-bottom: 32px;
+}
+.chapter-num {
+  font-family: var(--font-mono);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent);
+  padding: 5px 12px;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  white-space: nowrap;
+  margin-top: 4px;
+}
+.chapter h2 {
+  font-family: var(--font-display);
+  font-size: 30px; font-weight: 900;
+  color: var(--cream);
+  letter-spacing: -.01em;
+  line-height: 1.15;
+}
+.chapter h2 small {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 13px; font-weight: 400;
+  font-style: normal;
+  color: var(--muted);
+  letter-spacing: 0;
+  margin-top: 3px;
+}
+
+/* ── THEORY BOX ── */
+.theory {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin: 18px 0;
+}
+.theory-title {
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.theory p, .theory li { font-size: 14px; line-height: 1.7; color: var(--text); }
+.theory ul, .theory ol { padding-left: 18px; }
+.theory li { margin-bottom: 4px; }
+.theory .formula {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent);
+  background: rgba(255,255,255,.04);
+  padding: 8px 14px;
+  border-radius: 6px;
+  margin: 8px 0;
+  display: inline-block;
+}
+
+/* ── CODE ── */
+.code-block {
+  background: #0a0b0e;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 14px 0;
+}
+.code-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 16px;
+  background: rgba(255,255,255,.03);
+  border-bottom: 1px solid var(--border);
+}
+.code-dots { display: flex; gap: 5px; }
+.code-dots span { width: 9px; height: 9px; border-radius: 50%; }
+.code-dots span:nth-child(1){background:#ff5f57}
+.code-dots span:nth-child(2){background:#febc2e}
+.code-dots span:nth-child(3){background:#28c840}
+.code-lang {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+}
+pre {
+  padding: 16px 20px;
+  overflow-x: auto;
+  tab-size: 4;
+}
+pre code {
+  font-family: var(--font-mono);
+  font-size: 12.5px; line-height: 1.75;
+  color: #abb2bf;
+  background: none; padding: 0;
+}
+.kw{color:#c678dd} .tp{color:#e5c07b} .fn{color:#61afef}
+.cm{color:#5c6370;font-style:italic} .nm{color:#d19a66}
+.st{color:#98c379} .op{color:#56b6c2} .pp{color:#e06c75}
+
+/* ── PROBLEM GRID ── */
+.problems { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+
+.problem {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+.problem:hover { border-color: var(--accent); }
+.problem-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px;
+  cursor: pointer;
+  user-select: none;
+}
+.prob-id {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+  color: var(--accent);
+  background: rgba(255,255,255,.05);
+  padding: 3px 8px; border-radius: 4px;
+  white-space: nowrap;
+}
+.prob-title { font-size: 14.5px; font-weight: 600; color: var(--cream); flex: 1; }
+.prob-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag {
+  font-size: 11px; font-weight: 500;
+  padding: 2px 8px; border-radius: 4px;
+  background: rgba(255,255,255,.06);
+  color: var(--muted);
+}
+.diff {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  padding: 3px 10px; border-radius: 999px; white-space: nowrap;
+}
+.diff.d1{background:rgba(79,195,161,.12);color:#4fc3a1}
+.diff.d2{background:rgba(240,165,0,.12);color:#f0a500}
+.diff.d3{background:rgba(232,105,90,.12);color:#e8695a}
+.diff.d4{background:rgba(124,158,248,.12);color:#7c9ef8}
+
+.chevron {
+  color: var(--muted); transition: transform .2s;
+  font-size: 14px; flex-shrink: 0;
+}
+.problem.open .chevron { transform: rotate(90deg); }
+
+.problem-body {
+  display: none;
+  padding: 0 20px 18px;
+  border-top: 1px solid var(--border);
+}
+.problem.open .problem-body { display: block; }
+
+.prob-section { margin-top: 14px; }
+.prob-section-title {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 6px;
+}
+.prob-section p, .prob-section li {
+  font-size: 13.5px; line-height: 1.7; color: var(--text);
+}
+.prob-section ul { padding-left: 16px; }
+.prob-section li { margin-bottom: 3px; }
+.prob-section .hint {
+  background: rgba(255,255,255,.04);
+  border-left: 2px solid var(--accent);
+  padding: 9px 14px; border-radius: 0 6px 6px 0;
+  font-size: 13px; color: var(--text);
+  margin-top: 8px;
+  font-style: italic;
+}
+.prob-section .io-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  margin-top: 6px;
+}
+.io-box {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px; padding: 10px 14px;
+}
+.io-label {
+  font-family: var(--font-mono); font-size: 9px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 5px;
+}
+.io-box pre {
+  padding: 0; font-size: 12px; color: var(--cream);
+  font-family: var(--font-mono);
+}
+
+/* ── TABLE ── */
+.table-wrap {
+  overflow-x: auto; border-radius: 8px;
+  border: 1px solid var(--border); margin: 14px 0;
+}
+table { width: 100%; border-collapse: collapse; }
+thead tr { background: rgba(255,255,255,.04); }
+thead th {
+  padding: 10px 14px;
+  font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--muted); text-align: left;
+}
+tbody tr { border-top: 1px solid var(--border); }
+tbody tr:hover { background: rgba(255,255,255,.02); }
+tbody td {
+  padding: 9px 14px; font-size: 13px; color: var(--text);
+  vertical-align: middle;
+}
+td code, th code {
+  font-family: var(--font-mono); font-size: 11.5px;
+  color: var(--accent);
+  background: rgba(255,255,255,.06);
+  padding: 1px 6px; border-radius: 3px;
+}
+
+/* ── COMPLEXITY BADGE ── */
+.cx { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--accent); }
+
+/* ── FORMULA HIGHLIGHT ── */
+.fh {
+  font-family: var(--font-mono); font-size: 13px;
+  color: var(--accent);
+  background: rgba(255,255,255,.05);
+  padding: 2px 8px; border-radius: 4px;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  display: flex; align-items: center; gap: 14px;
+  margin: 24px 0 18px;
+}
+.divider-line { flex: 1; height: 1px; background: var(--border); }
+.divider-label {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+  letter-spacing: .15em; text-transform: uppercase; color: var(--muted);
+}
+
+/* ── QUICK-REF GRID ── */
+.qref { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0; }
+.qref-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px; padding: 13px 15px;
+}
+.qref-label { font-size: 11px; color: var(--muted); font-weight: 500; margin-bottom: 4px; }
+.qref-val { font-family: var(--font-mono); font-size: 12.5px; color: var(--accent); font-weight: 600; }
+
+/* ── STRATEGY CARDS ── */
+.strategy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
+.strategy-card {
+  border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  background: var(--surface);
+}
+.strategy-card .s-title {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  letter-spacing: .08em; color: var(--accent); margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.strategy-card p { font-size: 13px; line-height: 1.65; color: var(--muted); }
+
+/* ── PROG BAR ── */
+.prog-section { margin: 14px 0; }
+.prog-item { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+.prog-label { font-size: 13px; color: var(--text); min-width: 200px; }
+.prog-bar { flex: 1; height: 5px; background: rgba(255,255,255,.07); border-radius: 99px; overflow: hidden; }
+.prog-fill { height: 100%; border-radius: 99px; background: var(--accent); }
+.prog-pct { font-family: var(--font-mono); font-size: 11px; color: var(--muted); min-width: 32px; text-align: right; }
+
+/* ── FOOTER ── */
+footer {
+  margin-left: 240px;
+  padding: 20px 64px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer p { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeIn { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+.chapter { animation: fadeIn .5s ease both; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  .sidebar{display:none}
+  main,footer{margin-left:0}
+  .chapter,.hero{padding:40px 24px}
+  .qref{grid-template-columns:1fr 1fr}
+  .strategy-grid{grid-template-columns:1fr}
+  .prob-section .io-grid{grid-template-columns:1fr}
+}
+
+/* ── CHAPTER ACCENTS ── */
+.ch1{--accent:var(--c1)} .ch2{--accent:var(--c2)} .ch3{--accent:var(--c3)}
+.ch4{--accent:var(--c4)} .ch5{--accent:var(--c5)} .ch6{--accent:var(--c6)}
+.ch7{--accent:var(--c7)}
+
+/* ── NAV ACCENTS ── */
+.na1{--accent:var(--c1)} .na2{--accent:var(--c2)} .na3{--accent:var(--c3)}
+.na4{--accent:var(--c4)} .na5{--accent:var(--c5)} .na6{--accent:var(--c6)}
+.na7{--accent:var(--c7)}
+
+/* inline highlight */
+strong { color: var(--cream); font-weight: 600; }
+em { color: var(--accent); font-style: italic; }
+p { margin-bottom: 10px; }
+p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ SIDEBAR ══════════════ -->
+<div class="sidebar">
+  <div class="sidebar-top">
+    <div class="sidebar-badge">Tin học trẻ · Lào Cai</div>
+    <div class="sidebar-title">Chuyên đề<br>Lớp 10</div>
+    <div class="sidebar-subtitle">7 chuyên đề · 42 bài tập</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Nội dung</div>
+    <nav>
+      <a href="#ch1" class="na1 active"><span class="dot"></span>Toán số học</a>
+      <a href="#ch2" class="na2"><span class="dot"></span>Tìm kiếm & Sắp xếp</a>
+      <a href="#ch3" class="na3"><span class="dot"></span>Mảng & Chuỗi</a>
+      <a href="#ch4" class="na4"><span class="dot"></span>Quy hoạch động</a>
+      <a href="#ch5" class="na5"><span class="dot"></span>Thuật toán tham lam</a>
+      <a href="#ch6" class="na6"><span class="dot"></span>Đồ thị cơ bản</a>
+      <a href="#ch7" class="na7"><span class="dot"></span>Cấu trúc dữ liệu</a>
+    </nav>
+  </div>
+  <div class="sidebar-footer">
+    Cấp độ: Tỉnh · Lớp 10<br>
+    Cập nhật 2025
+  </div>
+</div>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Tài liệu ôn thi chuyên sâu</div>
+  <h1>Tin học trẻ<br><span class="accent">Lào Cai</span> Lớp 10</h1>
+  <p class="hero-sub">
+    Tập chuyên đề đầy đủ — từ toán số học, tìm kiếm, xử lý mảng, quy hoạch động đến đồ thị — được thiết kế để đạt điểm cao tại kỳ thi Tin học trẻ cấp tỉnh.
+  </p>
+  <div class="hero-chips">
+    <div class="chip"><span class="c" style="background:var(--c1)"></span>Toán số học</div>
+    <div class="chip"><span class="c" style="background:var(--c2)"></span>Tìm kiếm</div>
+    <div class="chip"><span class="c" style="background:var(--c3)"></span>Mảng / Chuỗi</div>
+    <div class="chip"><span class="c" style="background:var(--c4)"></span>Quy hoạch động</div>
+    <div class="chip"><span class="c" style="background:var(--c5)"></span>Tham lam</div>
+    <div class="chip"><span class="c" style="background:var(--c6)"></span>Đồ thị</div>
+    <div class="chip"><span class="c" style="background:var(--c7)"></span>CTDL</div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-n">7</span><span class="stat-l">Chuyên đề</span></div>
+    <div class="stat"><span class="stat-n">42</span><span class="stat-l">Bài tập có lời giải</span></div>
+    <div class="stat"><span class="stat-n">4</span><span class="stat-l">Mức độ khó</span></div>
+    <div class="stat"><span class="stat-n">∞</span><span class="stat-l">Điểm tối đa</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ CH1: TOÁN SỐ HỌC ══════════════ -->
+<section class="chapter ch1" id="ch1">
+  <div class="chapter-head">
+    <div class="chapter-num">Chuyên đề 01</div>
+    <h2>Toán số học & Lý thuyết số<small>Number Theory — nền tảng không thể thiếu trong mọi kỳ thi</small></h2>
+  </div>
+
+  <div class="theory">
+    <div class="theory-title">Kiến thức cốt lõi</div>
+    <div class="qref">
+      <div class="qref-item"><div class="qref-label">Kiểm tra số nguyên tố</div><div class="qref-val">O(√N)</div></div>
+      <div class="qref-item"><div class="qref-label">Sàng Eratosthenes</div><div class="qref-val">O(N log log N)</div></div>
+      <div class="qref-item"><div class="qref-label">GCD – Euclid</div><div class="qref-val">O(log min(a,b))</div></div>
+      <div class="qref-item"><div class="qref-label">Lũy thừa nhanh</div><div class="qref-val">O(log n)</div></div>
+      <div class="qref-item"><div class="qref-label">Số ước của N</div><div class="qref-val">O(√N)</div></div>
+      <div class="qref-item"><div class="qref-label">Tổng ước — σ(N)</div><div class="qref-val">O(√N)</div></div>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-bar"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">C++ · Template số học</span></div>
+    <pre><code><span class="cm">// Kiểm tra số nguyên tố O(√N)</span>
+<span class="tp">bool</span> <span class="fn">isPrime</span>(<span class="tp">long long</span> n) {
+    <span class="kw">if</span> (n < <span class="nm">2</span>) <span class="kw">return false</span>;
+    <span class="kw">for</span> (<span class="tp">long long</span> i = <span class="nm">2</span>; i * i <= n; i++)
+        <span class="kw">if</span> (n % i == <span class="nm">0</span>) <span class="kw">return false</span>;
+    <span class="kw">return true</span>;
+}
+
+<span class="cm">// Sàng Eratosthenes</span>
+vector&lt;<span class="tp">bool</span>&gt; <span class="fn">sieve</span>(<span class="tp">int</span> N) {
+    vector&lt;<span class="tp">bool</span>&gt; pr(N+<span class="nm">1</span>, <span class="kw">true</span>);
+    pr[<span class="nm">0</span>] = pr[<span class="nm">1</span>] = <span class="kw">false</span>;
+    <span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">2</span>; i*i <= N; i++)
+        <span class="kw">if</span> (pr[i])
+            <span class="kw">for</span> (<span class="tp">int</span> j = i*i; j <= N; j += i) pr[j] = <span class="kw">false</span>;
+    <span class="kw">return</span> pr;
+}
+
+<span class="cm">// GCD, LCM</span>
+<span class="tp">long long</span> <span class="fn">gcd</span>(<span class="tp">long long</span> a, <span class="tp">long long</span> b){ <span class="kw">return</span> b ? <span class="fn">gcd</span>(b, a%b) : a; }
+<span class="tp">long long</span> <span class="fn">lcm</span>(<span class="tp">long long</span> a, <span class="tp">long long</span> b){ <span class="kw">return</span> a / <span class="fn">gcd</span>(a,b) * b; }
+
+<span class="cm">// Lũy thừa nhanh (mod)</span>
+<span class="tp">long long</span> <span class="fn">power</span>(<span class="tp">long long</span> base, <span class="tp">long long</span> exp, <span class="tp">long long</span> mod) {
+    <span class="tp">long long</span> res = <span class="nm">1</span>;
+    base %= mod;
+    <span class="kw">while</span> (exp > <span class="nm">0</span>) {
+        <span class="kw">if</span> (exp & <span class="nm">1</span>) res = res * base % mod;
+        base = base * base % mod;
+        exp >>= <span class="nm">1</span>;
+    }
+    <span class="kw">return</span> res;
+}
+
+<span class="cm">// Liệt kê tất cả ước của N</span>
+vector&lt;<span class="tp">int</span>&gt; <span class="fn">divisors</span>(<span class="tp">int</span> n) {
+    vector&lt;<span class="tp">int</span>&gt; d;
+    <span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">1</span>; i*i <= n; i++)
+        <span class="kw">if</span> (n%i==<span class="nm">0</span>) { d.push_back(i); <span class="kw">if</span>(i!=n/i) d.push_back(n/i); }
+    sort(d.begin(), d.end());
+    <span class="kw">return</span> d;
+}</code></pre>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-label">Bài tập</div><div class="divider-line"></div></div>
+  <div class="problems">
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">NT-01</span>
+        <span class="prob-title">Đếm số nguyên tố trong đoạn [L, R]</span>
+        <div class="prob-tags"><span class="tag">Sàng</span><span class="tag">Số học</span></div>
+        <span class="diff d1">★ Dễ</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho T truy vấn. Mỗi truy vấn gồm hai số L, R (1 ≤ L ≤ R ≤ 10⁶). Đếm số nguyên tố trong đoạn [L, R].</p>
+          <p><strong>Ràng buộc:</strong> T ≤ 10⁵, 1 ≤ L ≤ R ≤ 10⁶</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Ví dụ</div>
+          <div class="io-grid">
+            <div class="io-box"><div class="io-label">Input</div><pre>3
+1 10
+2 20
+7 7</pre></div>
+            <div class="io-box"><div class="io-label">Output</div><pre>4
+8
+1</pre></div>
+          </div>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Dùng sàng Eratosthenes để đánh dấu toàn bộ số nguyên tố ≤ 10⁶ một lần trước. Sau đó tính <strong>prefix sum</strong> — mỗi truy vấn trả lời trong O(1).</div>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Độ phức tạp</div>
+          <p>Tiền xử lý: <span class="fh">O(N log log N)</span> &nbsp;|&nbsp; Mỗi truy vấn: <span class="fh">O(1)</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">NT-02</span>
+        <span class="prob-title">Phân tích thừa số nguyên tố</span>
+        <div class="prob-tags"><span class="tag">Số học</span></div>
+        <span class="diff d1">★ Dễ</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho số N (2 ≤ N ≤ 10¹²). In ra dạng phân tích thừa số nguyên tố của N theo thứ tự tăng dần.</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Ví dụ</div>
+          <div class="io-grid">
+            <div class="io-box"><div class="io-label">Input</div><pre>360</pre></div>
+            <div class="io-box"><div class="io-label">Output</div><pre>2^3 * 3^2 * 5^1</pre></div>
+          </div>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Thử chia cho mọi i từ 2 đến √N. Sau khi chia xong nếu N > 1 thì N chính là thừa số nguyên tố còn lại. Dùng <strong>map&lt;int,int&gt;</strong> đếm số lần xuất hiện.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">NT-03</span>
+        <span class="prob-title">UCLN & BCNN của dãy số</span>
+        <div class="prob-tags"><span class="tag">GCD</span><span class="tag">LCM</span></div>
+        <span class="diff d1">★ Dễ</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho mảng N số nguyên dương a₁, a₂, ..., aₙ. Tính GCD và LCM của cả mảng. (N ≤ 10⁵, aᵢ ≤ 10⁹)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Áp dụng tính chất: gcd(a, b, c) = gcd(gcd(a,b), c). Cẩn thận <strong>overflow</strong> khi tính LCM — dùng <strong>long long</strong> và chia trước nhân sau: <code>lcm = a / gcd(a,b) * b</code>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">NT-04</span>
+        <span class="prob-title">Số hoàn hảo & số thân thiện</span>
+        <div class="prob-tags"><span class="tag">Ước số</span></div>
+        <span class="diff d2">★★ TB</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Số N gọi là <strong>số hoàn hảo</strong> nếu tổng các ước thật sự (ước nhỏ hơn N) bằng N. Ví dụ: 6 = 1+2+3.</p>
+          <p>Cho N (1 ≤ N ≤ 10⁸), kiểm tra N có phải số hoàn hảo không. In ra tất cả số hoàn hảo ≤ 10⁴.</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Tính tổng ước thật sự trong O(√N). Để in tất cả số hoàn hảo ≤ 10⁴, dùng vòng lặp — thực ra chỉ có 4 số hoàn hảo ≤ 10⁸: 6, 28, 496, 8128.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">NT-05</span>
+        <span class="prob-title">Lũy thừa modulo lớn</span>
+        <div class="prob-tags"><span class="tag">Fast Power</span><span class="tag">Modular</span></div>
+        <span class="diff d2">★★ TB</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho a, b, m (1 ≤ a, b ≤ 10¹⁸, 2 ≤ m ≤ 10⁹). Tính aᵇ mod m.</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Dùng thuật toán <strong>fast power (binary exponentiation)</strong>. Lưu ý: khi a và m lớn, phép nhân <code>base * base</code> có thể tràn — dùng <code>__int128</code> hoặc kỹ thuật <strong>binary multiplication</strong>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">NT-06</span>
+        <span class="prob-title">Đếm số có đúng K ước</span>
+        <div class="prob-tags"><span class="tag">Số học</span><span class="tag">Ước số</span></div>
+        <span class="diff d3">★★★ Khó</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho N và K (1 ≤ N ≤ 10⁶, 1 ≤ K ≤ 1500). Đếm số nguyên trong [1, N] có đúng K ước.</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Với mỗi i từ 1 đến N, số ước của i là d[i]. Ta dùng sàng: với mỗi i, cộng 1 vào d[i], d[2i], d[3i], ... Độ phức tạp O(N log N). Sau đó đếm i có d[i] = K.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end problems -->
+</section>
+
+<!-- ══════════════ CH2: TÌM KIẾM & SẮP XẾP ══════════════ -->
+<section class="chapter ch2" id="ch2">
+  <div class="chapter-head">
+    <div class="chapter-num">Chuyên đề 02</div>
+    <h2>Tìm kiếm & Sắp xếp<small>Binary Search — công cụ "giảm log" trong mọi bài toán tối ưu</small></h2>
+  </div>
+
+  <div class="theory">
+    <div class="theory-title">Tìm kiếm nhị phân — khuôn mẫu chuẩn</div>
+    <p>Binary search không chỉ để tìm phần tử trong mảng — nó là công cụ tối ưu hóa: <strong>"Binary search on answer"</strong> — tìm giá trị nhỏ nhất / lớn nhất thỏa mãn điều kiện.</p>
+    <div class="strategy-grid">
+      <div class="strategy-card">
+        <div class="s-title">Tìm vị trí trong mảng</div>
+        <p>Mảng sắp xếp tăng dần. Tìm vị trí đầu tiên có a[mid] ≥ target (lower_bound) hoặc a[mid] > target (upper_bound).</p>
+      </div>
+      <div class="strategy-card">
+        <div class="s-title">Binary search on answer</div>
+        <p>Khi bài hỏi "tìm giá trị nhỏ nhất X sao cho f(X) = true" — binary search trên X, kiểm tra điều kiện trong O(N).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-bar"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">C++ · Binary Search Templates</span></div>
+    <pre><code><span class="cm">// Template chuẩn — lower_bound tự viết</span>
+<span class="tp">int</span> <span class="fn">lower_bound</span>(vector&lt;<span class="tp">int</span>&gt;& a, <span class="tp">int</span> x) {
+    <span class="tp">int</span> lo = <span class="nm">0</span>, hi = a.size();
+    <span class="kw">while</span> (lo < hi) {
+        <span class="tp">int</span> mid = (lo + hi) / <span class="nm">2</span>;
+        <span class="kw">if</span> (a[mid] < x) lo = mid + <span class="nm">1</span>;
+        <span class="kw">else</span>            hi = mid;
+    }
+    <span class="kw">return</span> lo;
+}
+
+<span class="cm">// Binary search on answer: tìm số ngày ít nhất để sản xuất đủ hàng</span>
+<span class="tp">bool</span> <span class="fn">check</span>(<span class="tp">int</span> days, vector&lt;<span class="tp">int</span>&gt;& rate, <span class="tp">long long</span> need) {
+    <span class="tp">long long</span> total = <span class="nm">0</span>;
+    <span class="kw">for</span> (<span class="tp">int</span> r : rate) total += (<span class="tp">long long</span>)r * days;
+    <span class="kw">return</span> total >= need;
+}
+
+<span class="tp">int</span> lo = <span class="nm">1</span>, hi = <span class="nm">1e9</span>, ans = hi;
+<span class="kw">while</span> (lo <= hi) {
+    <span class="tp">int</span> mid = (lo + hi) / <span class="nm">2</span>;
+    <span class="kw">if</span> (<span class="fn">check</span>(mid, rate, need)) { ans = mid; hi = mid - <span class="nm">1</span>; }
+    <span class="kw">else</span> lo = mid + <span class="nm">1</span>;
+}</code></pre>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-label">Bài tập</div><div class="divider-line"></div></div>
+  <div class="problems">
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">BS-01</span>
+        <span class="prob-title">Tìm kiếm trong mảng xoay</span>
+        <div class="prob-tags"><span class="tag">Binary Search</span></div>
+        <span class="diff d2">★★ TB</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Mảng a[] được sắp xếp tăng dần rồi xoay tại một điểm nào đó. Ví dụ: [4,5,6,7,0,1,2]. Cho target, tìm vị trí target trong mảng. Trả về -1 nếu không tồn tại. Yêu cầu O(log N).</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Luôn có một nửa mảng đã <strong>được sắp xếp hoàn toàn</strong>. Kiểm tra target có nằm trong nửa đó không: nếu có, thu hẹp về nửa đó; nếu không, thu hẹp sang nửa kia.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">BS-02</span>
+        <span class="prob-title">Chia bò vào chuồng — tối đa hóa min</span>
+        <div class="prob-tags"><span class="tag">Binary search on answer</span></div>
+        <span class="diff d2">★★ TB</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Có N chuồng bò nằm trên trục số tại các vị trí x₁ < x₂ < ... < xₙ. Đặt C con bò vào N chuồng sao cho khoảng cách <strong>nhỏ nhất</strong> giữa hai con bò bất kỳ là <strong>lớn nhất có thể</strong>. (USACO – Aggressive Cows)</p>
+          <p><strong>Ràng buộc:</strong> 2 ≤ C ≤ N ≤ 10⁵, xᵢ ≤ 10⁹</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Binary search trên khoảng cách tối thiểu D. Hàm check(D): tham lam — đặt bò vào chuồng đầu tiên, lần lượt đặt bò tiếp theo vào chuồng đầu tiên cách bò trước ≥ D. Kiểm tra đặt được C con không.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">BS-03</span>
+        <span class="prob-title">Chia mảng thành K phần — tổng max nhỏ nhất</span>
+        <div class="prob-tags"><span class="tag">Binary search on answer</span></div>
+        <span class="diff d3">★★★ Khó</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Chia mảng N phần tử thành đúng K phần liên tiếp sao cho tổng lớn nhất trong các phần là nhỏ nhất. (LeetCode 410)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Binary search trên giá trị "tổng tối đa cho phép" X. Hàm check(X): tham lam — duyệt mảng, cộng dồn cho đến khi vượt X thì tạo phần mới. Kiểm tra tổng số phần ≤ K.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">BS-04</span>
+        <span class="prob-title">Căn bậc hai nguyên — không dùng sqrt</span>
+        <div class="prob-tags"><span class="tag">Binary Search</span><span class="tag">Số học</span></div>
+        <span class="diff d1">★ Dễ</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho N (1 ≤ N ≤ 10¹⁸). Tìm ⌊√N⌋ mà <strong>không dùng hàm sqrt</strong> của thư viện.</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Binary search trong [1, 10⁹]. Tìm giá trị lớn nhất x sao cho x*x ≤ N. Cẩn thận overflow: dùng <code>__int128</code> hoặc kiểm tra x ≤ N/x trước khi nhân.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">BS-05</span>
+        <span class="prob-title">Sắp xếp và đếm nghịch thế</span>
+        <div class="prob-tags"><span class="tag">Merge Sort</span><span class="tag">BIT</span></div>
+        <span class="diff d3">★★★ Khó</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho mảng N phần tử. Đếm số cặp (i, j) sao cho i < j và a[i] > a[j] (nghịch thế). N ≤ 2×10⁵.</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Hai cách: (1) Sửa Merge Sort — đếm nghịch thế khi merge. (2) Dùng BIT (Fenwick Tree) — nén giá trị, duyệt từ phải sang trái, đếm số phần tử nhỏ hơn a[i] đã thêm vào.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ CH3: MẢNG & CHUỖI ══════════════ -->
+<section class="chapter ch3" id="ch3">
+  <div class="chapter-head">
+    <div class="chapter-num">Chuyên đề 03</div>
+    <h2>Xử lý mảng & Chuỗi<small>Prefix Sum · Two Pointers · Sliding Window · Hashing</small></h2>
+  </div>
+
+  <div class="theory">
+    <div class="theory-title">Bộ tứ kỹ thuật xử lý mảng</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Kỹ thuật</th><th>Khi nào dùng</th><th>Độ phức tạp</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Prefix Sum</strong></td><td>Tổng đoạn con [l,r] nhiều truy vấn</td><td><code>O(N) + O(1)/query</code></td></tr>
+          <tr><td><strong>Two Pointers</strong></td><td>Mảng sắp xếp, tìm cặp/bộ ba</td><td><code>O(N)</code> hoặc <code>O(N log N)</code></td></tr>
+          <tr><td><strong>Sliding Window</strong></td><td>Đoạn con độ dài K, max/min con trượt</td><td><code>O(N)</code></td></tr>
+          <tr><td><strong>Hashing chuỗi</strong></td><td>So sánh chuỗi con nhanh, tìm palindrome</td><td><code>O(N) + O(1)/query</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-bar"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">C++ · Kỹ thuật mảng cơ bản</span></div>
+    <pre><code><span class="cm">// Prefix sum 2D</span>
+<span class="tp">int</span> ps[<span class="nm">1001</span>][<span class="nm">1001</span>];
+<span class="kw">for</span>(<span class="tp">int</span> i=<span class="nm">1</span>;i<=n;i++)
+  <span class="kw">for</span>(<span class="tp">int</span> j=<span class="nm">1</span>;j<=m;j++)
+    ps[i][j] = a[i][j] + ps[i-<span class="nm">1</span>][j] + ps[i][j-<span class="nm">1</span>] - ps[i-<span class="nm">1</span>][j-<span class="nm">1</span>];
+
+<span class="cm">// Truy vấn tổng hình chữ nhật (r1,c1)-(r2,c2)</span>
+<span class="kw">auto</span> <span class="fn">query</span> = [&](<span class="tp">int</span> r1,<span class="tp">int</span> c1,<span class="tp">int</span> r2,<span class="tp">int</span> c2) {
+    <span class="kw">return</span> ps[r2][c2]-ps[r1-<span class="nm">1</span>][c2]-ps[r2][c1-<span class="nm">1</span>]+ps[r1-<span class="nm">1</span>][c1-<span class="nm">1</span>];
+};
+
+<span class="cm">// Two pointers: tìm đoạn con có tổng đúng bằng S</span>
+<span class="tp">int</span> l=<span class="nm">0</span>, sum=<span class="nm">0</span>;
+<span class="kw">for</span>(<span class="tp">int</span> r=<span class="nm">0</span>; r<n; r++){
+    sum += a[r];
+    <span class="kw">while</span>(sum > S) sum -= a[l++];
+    <span class="kw">if</span>(sum == S) ans++;
+}
+
+<span class="cm">// Sliding window max — dùng deque</span>
+deque&lt;<span class="tp">int</span>&gt; dq;
+<span class="kw">for</span>(<span class="tp">int</span> i=<span class="nm">0</span>; i<n; i++){
+    <span class="kw">while</span>(!dq.empty() && a[dq.back()] <= a[i]) dq.pop_back();
+    dq.push_back(i);
+    <span class="kw">if</span>(dq.front() <= i-k) dq.pop_front();
+    <span class="kw">if</span>(i >= k-<span class="nm">1</span>) maxK[i-k+<span class="nm">1</span>] = a[dq.front()];
+}</code></pre>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-label">Bài tập</div><div class="divider-line"></div></div>
+  <div class="problems">
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">AR-01</span>
+        <span class="prob-title">Đoạn con có tổng lớn nhất (Kadane)</span>
+        <div class="prob-tags"><span class="tag">DP mảng</span></div>
+        <span class="diff d1">★ Dễ</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho mảng N số nguyên (có thể âm). Tìm đoạn con liên tiếp có tổng lớn nhất. (N ≤ 10⁶)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Thuật toán Kadane: duy trì <code>cur</code> = tổng đoạn con tốt nhất kết thúc tại i. <code>cur = max(a[i], cur + a[i])</code>. Kết quả = max của tất cả cur.</div>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Mở rộng</div>
+          <p>In ra vị trí bắt đầu và kết thúc của đoạn con đó. Xử lý trường hợp tất cả phần tử âm.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">AR-02</span>
+        <span class="prob-title">Tổng hình chữ nhật con lớn nhất</span>
+        <div class="prob-tags"><span class="tag">Prefix Sum 2D</span><span class="tag">Kadane</span></div>
+        <span class="diff d3">★★★ Khó</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho ma trận N×M số nguyên. Tìm hình chữ nhật con có tổng lớn nhất. (N, M ≤ 100)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Fix hai hàng r1, r2. Dùng prefix sum để tính tổng mỗi cột từ r1 đến r2 — tạo thành mảng 1D. Áp dụng Kadane trên mảng 1D đó. O(N² × M).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">AR-03</span>
+        <span class="prob-title">Đoạn con dài nhất không có ký tự lặp</span>
+        <div class="prob-tags"><span class="tag">Sliding Window</span><span class="tag">HashMap</span></div>
+        <span class="diff d2">★★ TB</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho chuỗi S. Tìm độ dài đoạn con dài nhất không có ký tự nào xuất hiện quá 1 lần. (LeetCode 3)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Sliding window với hai con trỏ l, r. Dùng <code>unordered_map</code> đếm tần suất. Khi ký tự r đã có trong window, co l về phải cho đến khi không còn trùng.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">AR-04</span>
+        <span class="prob-title">Số đoạn con có tổng chia hết cho K</span>
+        <div class="prob-tags"><span class="tag">Prefix Sum</span><span class="tag">Modular</span></div>
+        <span class="diff d2">★★ TB</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho mảng N số nguyên và K. Đếm số đoạn con có tổng chia hết cho K. (N ≤ 10⁵, K ≤ 10⁴)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Tính prefix sum mod K. Tổng đoạn [l+1, r] chia hết cho K ⟺ prefix[r] ≡ prefix[l] (mod K). Đếm số cặp (i, j) có prefix[i] = prefix[j] — dùng mảng đếm <code>cnt[K]</code>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">AR-05</span>
+        <span class="prob-title">Kiểm tra chuỗi palindrome bằng hashing</span>
+        <div class="prob-tags"><span class="tag">Hashing</span><span class="tag">Chuỗi</span></div>
+        <span class="diff d2">★★ TB</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho chuỗi S độ dài N và Q truy vấn. Mỗi truy vấn hỏi đoạn S[l..r] có phải palindrome không. (N, Q ≤ 10⁵)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Tính hash xuôi và hash ngược của chuỗi. Đoạn [l,r] là palindrome ⟺ hash xuôi [l,r] = hash ngược của đoạn tương ứng. Dùng hai cơ số khác nhau để giảm xác suất va chạm.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">AR-06</span>
+        <span class="prob-title">Anagram — nhóm các chuỗi đồng nhất</span>
+        <div class="prob-tags"><span class="tag">Sắp xếp</span><span class="tag">HashMap</span></div>
+        <span class="diff d1">★ Dễ</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho danh sách N chuỗi. Nhóm các chuỗi là anagram của nhau thành từng nhóm. (N ≤ 10⁴, độ dài ≤ 100)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Với mỗi chuỗi, tạo key = chuỗi đó sau khi sắp xếp ký tự theo bảng chữ cái. Dùng <code>unordered_map&lt;string, vector&lt;string&gt;&gt;</code> nhóm theo key.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ CH4: QUY HOẠCH ĐỘNG ══════════════ -->
+<section class="chapter ch4" id="ch4">
+  <div class="chapter-head">
+    <div class="chapter-num">Chuyên đề 04</div>
+    <h2>Quy hoạch động<small>Dynamic Programming — trọng tâm của mọi kỳ thi tin học</small></h2>
+  </div>
+
+  <div class="theory">
+    <div class="theory-title">Nhận diện bài toán DP</div>
+    <p>Bài toán có thể giải bằng DP khi thỏa hai tính chất:</p>
+    <ul style="padding-left:18px;margin-top:8px;font-size:14px;color:var(--text)">
+      <li style="margin-bottom:6px"><strong>Tính chất tối ưu con:</strong> lời giải tối ưu của bài toán chứa lời giải tối ưu của các bài toán con.</li>
+      <li style="margin-bottom:6px"><strong>Bài toán con trùng lặp:</strong> các bài toán con giống nhau được giải nhiều lần nếu dùng đệ quy thông thường.</li>
+    </ul>
+    <div class="strategy-grid" style="margin-top:12px">
+      <div class="strategy-card">
+        <div class="s-title">Quy trình 4 bước</div>
+        <p>1. Định nghĩa trạng thái dp[...] &nbsp;2. Viết công thức chuyển &nbsp;3. Khởi tạo base case &nbsp;4. Xác định thứ tự tính</p>
+      </div>
+      <div class="strategy-card">
+        <div class="s-title">Các dạng cổ điển</div>
+        <p>LIS · LCS · Ba lô 0/1 · Đổi tiền · Cắt que · Tam giác · DP trên cây · DP trên interval</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-bar"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">C++ · LIS O(N log N)</span></div>
+    <pre><code><span class="cm">// Dãy con tăng dài nhất — O(N log N) với patience sorting</span>
+<span class="tp">int</span> <span class="fn">LIS</span>(vector&lt;<span class="tp">int</span>&gt;& a) {
+    vector&lt;<span class="tp">int</span>&gt; dp; <span class="cm">// dp[i] = phần tử nhỏ nhất kết thúc dãy tăng độ dài i+1</span>
+    <span class="kw">for</span> (<span class="tp">int</span> x : a) {
+        <span class="kw">auto</span> it = lower_bound(dp.begin(), dp.end(), x);
+        <span class="kw">if</span> (it == dp.end()) dp.push_back(x);
+        <span class="kw">else</span> *it = x;
+    }
+    <span class="kw">return</span> dp.size();
+}
+
+<span class="cm">// Ba lô 0/1 — N vật, trọng lượng tối đa W</span>
+vector&lt;<span class="tp">int</span>&gt; dp(W+<span class="nm">1</span>, <span class="nm">0</span>);
+<span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">0</span>; i < N; i++)
+    <span class="kw">for</span> (<span class="tp">int</span> w = W; w >= weight[i]; w--)
+        dp[w] = max(dp[w], dp[w - weight[i]] + value[i]);
+
+<span class="cm">// LCS — Dãy con chung dài nhất</span>
+<span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">1</span>; i <= n; i++)
+    <span class="kw">for</span> (<span class="tp">int</span> j = <span class="nm">1</span>; j <= m; j++)
+        <span class="kw">if</span> (a[i] == b[j]) dp[i][j] = dp[i-<span class="nm">1</span>][j-<span class="nm">1</span>] + <span class="nm">1</span>;
+        <span class="kw">else</span>             dp[i][j] = max(dp[i-<span class="nm">1</span>][j], dp[i][j-<span class="nm">1</span>]);</code></pre>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-label">Bài tập</div><div class="divider-line"></div></div>
+  <div class="problems">
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">DP-01</span>
+        <span class="prob-title">Số cách leo cầu thang</span>
+        <div class="prob-tags"><span class="tag">DP 1D</span><span class="tag">Đếm</span></div>
+        <span class="diff d1">★ Dễ</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Có N bậc thang. Mỗi bước có thể leo 1, 2 hoặc 3 bậc. Đếm số cách leo từ bậc 0 lên bậc N. Kết quả mod 10⁹+7. (N ≤ 10⁶)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint"><code>dp[i] = dp[i-1] + dp[i-2] + dp[i-3]</code> với base case dp[0]=1, dp[1]=1, dp[2]=2. Đây là tổng quát của dãy Fibonacci.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">DP-02</span>
+        <span class="prob-title">Bài toán đổi tiền (Coin Change)</span>
+        <div class="prob-tags"><span class="tag">DP</span><span class="tag">Knapsack</span></div>
+        <span class="diff d2">★★ TB</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Có N loại tiền mệnh giá c₁, c₂, ..., cₙ (số lượng không giới hạn). Tìm số đồng xu ít nhất để đổi thành tổng S. (N ≤ 12, S ≤ 10⁴)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint"><code>dp[s] = min(dp[s], dp[s - c[i]] + 1)</code> với dp[0]=0, dp[s]=INF ban đầu. Vì dùng không giới hạn mỗi loại, duyệt mệnh giá <strong>từ trái sang phải</strong> (không phải từ phải sang trái như ba lô 0/1).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">DP-03</span>
+        <span class="prob-title">Dãy con tăng dài nhất (LIS)</span>
+        <div class="prob-tags"><span class="tag">LIS</span><span class="tag">Binary Search</span></div>
+        <span class="diff d2">★★ TB</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho dãy N số nguyên. Tìm độ dài dãy con tăng nghiêm ngặt dài nhất. Sau đó in ra một dãy như vậy. (N ≤ 10⁵)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">DP O(N²) cho N ≤ 5000: <code>dp[i] = max(dp[j]+1) với j&lt;i, a[j]&lt;a[i]</code>. Cho N ≤ 10⁵: dùng patience sorting với binary search O(N log N). Để in lại dãy, lưu trace mảng parent.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">DP-04</span>
+        <span class="prob-title">Bài toán ba lô 0/1</span>
+        <div class="prob-tags"><span class="tag">Knapsack</span></div>
+        <span class="diff d2">★★ TB</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Có N vật, vật i có trọng lượng w[i] và giá trị v[i]. Ba lô chứa tối đa W kg. Chọn các vật (mỗi vật chọn hoặc không) để tổng giá trị lớn nhất. (N ≤ 500, W ≤ 10⁴)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint"><code>dp[i][w] = max(dp[i-1][w], dp[i-1][w-wt[i]] + v[i])</code>. Tối ưu bộ nhớ về O(W) bằng cách duyệt w từ W xuống 0 trong vòng lặp ngoài theo i.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">DP-05</span>
+        <span class="prob-title">Đường đi tổng lớn nhất trong tam giác số</span>
+        <div class="prob-tags"><span class="tag">DP 2D</span></div>
+        <span class="diff d1">★ Dễ</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho tam giác số N hàng. Từ đỉnh xuống đáy, mỗi bước chỉ được đi sang ô trái dưới hoặc phải dưới. Tìm đường đi có tổng lớn nhất.</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Ví dụ</div>
+          <div class="io-grid">
+            <div class="io-box"><div class="io-label">Input</div><pre>   3
+  7 4
+ 2 4 6
+8 5 9 3</pre></div>
+            <div class="io-box"><div class="io-label">Output</div><pre>23
+(3→7→4→9)</pre></div>
+          </div>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">DP từ đáy lên: <code>dp[i][j] = triangle[i][j] + max(dp[i+1][j], dp[i+1][j+1])</code>. Đáp án là dp[0][0].</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">DP-06</span>
+        <span class="prob-title">Chỉnh sửa chuỗi tối thiểu (Edit Distance)</span>
+        <div class="prob-tags"><span class="tag">LCS</span><span class="tag">String DP</span></div>
+        <span class="diff d3">★★★ Khó</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho hai chuỗi S và T. Tính số thao tác ít nhất (thêm, xóa, thay thế 1 ký tự) để biến S thành T. (|S|, |T| ≤ 1000)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">
+            <code>dp[i][j]</code> = số thao tác ít nhất để biến S[1..i] thành T[1..j].<br>
+            Nếu S[i]==T[j]: dp[i][j] = dp[i-1][j-1]<br>
+            Ngược lại: dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1])
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">DP-07</span>
+        <span class="prob-title">Số cách phân tích số nguyên</span>
+        <div class="prob-tags"><span class="tag">Integer Partition</span><span class="tag">DP</span></div>
+        <span class="diff d3">★★★ Khó</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Đếm số cách viết N là tổng của các số nguyên dương (thứ tự không quan trọng). Ví dụ: 4 = 1+1+1+1 = 1+1+2 = 1+3 = 2+2 = 4 → 5 cách. (N ≤ 200, kết quả mod 10⁹+7)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Đây là bài toán <strong>Coin Change đếm số cách</strong> với các đồng xu từ 1 đến N. dp[s] += dp[s-i] với i từ 1 đến N, duyệt i trước s sau (unbounded knapsack).</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ CH5: THAM LAM ══════════════ -->
+<section class="chapter ch5" id="ch5">
+  <div class="chapter-head">
+    <div class="chapter-num">Chuyên đề 05</div>
+    <h2>Thuật toán tham lam<small>Greedy — luôn chọn tốt nhất tại mỗi bước, chứng minh tính đúng đắn</small></h2>
+  </div>
+
+  <div class="theory">
+    <div class="theory-title">Khi nào tham lam đúng?</div>
+    <p>Tham lam đúng khi thỏa <strong>Greedy Choice Property</strong>: lựa chọn tốt nhất tại mỗi bước luôn dẫn đến lời giải tổng thể tối ưu. Hai cách chứng minh phổ biến:</p>
+    <ul style="padding-left:18px;margin-top:8px;font-size:14px;color:var(--text)">
+      <li style="margin-bottom:4px"><strong>Exchange argument:</strong> giả sử tồn tại lời giải tốt hơn, hoán đổi để thành lời giải tham lam mà không tệ hơn → mâu thuẫn.</li>
+      <li style="margin-bottom:4px"><strong>Induction:</strong> quy nạp — lựa chọn tham lam đầu tiên luôn thuộc lời giải tối ưu.</li>
+    </ul>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-label">Bài tập</div><div class="divider-line"></div></div>
+  <div class="problems">
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">GR-01</span>
+        <span class="prob-title">Lịch hoạt động không xung đột (Activity Selection)</span>
+        <div class="prob-tags"><span class="tag">Interval</span><span class="tag">Sắp xếp</span></div>
+        <span class="diff d1">★ Dễ</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Có N hoạt động, hoạt động i diễn ra trong [sᵢ, fᵢ]. Chọn nhiều hoạt động nhất sao cho không có hai hoạt động nào trùng thời gian. (N ≤ 10⁵)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Sắp xếp theo thời gian kết thúc fᵢ tăng dần. Tham lam: chọn hoạt động kết thúc sớm nhất, rồi chọn hoạt động tiếp theo bắt đầu không sớm hơn kết thúc hoạt động vừa chọn.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">GR-02</span>
+        <span class="prob-title">Mã Huffman — nén dữ liệu</span>
+        <div class="prob-tags"><span class="tag">Priority Queue</span><span class="tag">Greedy</span></div>
+        <span class="diff d3">★★★ Khó</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho N ký tự với tần suất xuất hiện. Xây dựng mã nhị phân Huffman tối ưu. Tính tổng số bit cần dùng để mã hóa toàn bộ chuỗi gốc.</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Dùng <strong>min-heap (priority_queue)</strong>: liên tục lấy hai node có tần suất nhỏ nhất, tạo node cha với tần suất bằng tổng hai con, đưa lại vào heap. Tổng chi phí = tổng tần suất của tất cả node trung gian.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">GR-03</span>
+        <span class="prob-title">Phân công công việc — deadline</span>
+        <div class="prob-tags"><span class="tag">Sắp xếp</span><span class="tag">Union-Find</span></div>
+        <span class="diff d3">★★★ Khó</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Có N công việc, công việc i có deadline dᵢ và lợi nhuận pᵢ. Mỗi công việc mất 1 đơn vị thời gian. Chọn công việc để thực hiện trước deadline tương ứng sao cho tổng lợi nhuận tối đa. (Job Sequencing with Deadlines)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Sắp xếp theo lợi nhuận giảm dần. Với mỗi công việc, tìm <strong>slot trống gần nhất trước deadline</strong> (dùng Union-Find để tìm nhanh O(α(N))). Nếu có slot, lên lịch; nếu không, bỏ qua.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">GR-04</span>
+        <span class="prob-title">Nạp nhiên liệu tối thiểu — trạm xăng</span>
+        <div class="prob-tags"><span class="tag">Greedy</span><span class="tag">Heap</span></div>
+        <span class="diff d2">★★ TB</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Xe có bình xăng chứa tối đa C lít. Trên đường có N trạm xăng tại các vị trí xᵢ với giá gᵢ/lít. Xe xuất phát từ 0 đến đích D với bình đầy. Tính chi phí nhiên liệu tối thiểu.</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Tại mỗi trạm, nếu có trạm rẻ hơn trong tầm với, mua đủ để đến đó. Nếu không, mua đầy bình. Dùng <strong>priority queue</strong> hoặc stack đơn điệu để mô phỏng.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ CH6: ĐỒ THỊ ══════════════ -->
+<section class="chapter ch6" id="ch6">
+  <div class="chapter-head">
+    <div class="chapter-num">Chuyên đề 06</div>
+    <h2>Đồ thị cơ bản<small>BFS · DFS · Dijkstra · Kruskal · Topological Sort</small></h2>
+  </div>
+
+  <div class="theory">
+    <div class="theory-title">Bảng thuật toán đồ thị</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Thuật toán</th><th>Mục đích</th><th>Độ phức tạp</th><th>Điều kiện</th></tr></thead>
+        <tbody>
+          <tr><td><strong>BFS</strong></td><td>Đường đi ngắn nhất (cạnh đơn vị)</td><td><code>O(V+E)</code></td><td>Cạnh không trọng số</td></tr>
+          <tr><td><strong>DFS</strong></td><td>Thành phần liên thông, chu trình</td><td><code>O(V+E)</code></td><td>Đồ thị tổng quát</td></tr>
+          <tr><td><strong>Dijkstra</strong></td><td>Đường đi ngắn nhất từ 1 nguồn</td><td><code>O((V+E)log V)</code></td><td>Trọng số ≥ 0</td></tr>
+          <tr><td><strong>Bellman-Ford</strong></td><td>Đường đi ngắn nhất, phát hiện chu trình âm</td><td><code>O(VE)</code></td><td>Trọng số bất kỳ</td></tr>
+          <tr><td><strong>Floyd-Warshall</strong></td><td>Mọi cặp đỉnh</td><td><code>O(V³)</code></td><td>V ≤ 500</td></tr>
+          <tr><td><strong>Kruskal</strong></td><td>Cây khung nhỏ nhất</td><td><code>O(E log E)</code></td><td>Đồ thị vô hướng</td></tr>
+          <tr><td><strong>Topo Sort</strong></td><td>Thứ tự topo (DAG)</td><td><code>O(V+E)</code></td><td>Đồ thị có hướng không chu trình</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-bar"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">C++ · Dijkstra + Kruskal DSU</span></div>
+    <pre><code><span class="cm">// Dijkstra với priority_queue</span>
+vector&lt;<span class="tp">long long</span>&gt; <span class="fn">dijkstra</span>(<span class="tp">int</span> src, vector&lt;vector&lt;pair&lt;<span class="tp">int</span>,<span class="tp">int</span>&gt;&gt;&gt;& adj) {
+    <span class="tp">int</span> n = adj.size();
+    vector&lt;<span class="tp">long long</span>&gt; dist(n, LLONG_MAX);
+    priority_queue&lt;pair&lt;<span class="tp">long long</span>,<span class="tp">int</span>&gt;, vector&lt;pair&lt;<span class="tp">long long</span>,<span class="tp">int</span>&gt;&gt;, greater&lt;&gt;&gt; pq;
+    dist[src] = <span class="nm">0</span>;
+    pq.push({<span class="nm">0</span>, src});
+    <span class="kw">while</span> (!pq.empty()) {
+        <span class="kw">auto</span> [d, u] = pq.top(); pq.pop();
+        <span class="kw">if</span> (d > dist[u]) <span class="kw">continue</span>;
+        <span class="kw">for</span> (<span class="kw">auto</span> [v, w] : adj[u])
+            <span class="kw">if</span> (dist[u] + w < dist[v])
+                pq.push({dist[v] = dist[u] + w, v});
+    }
+    <span class="kw">return</span> dist;
+}
+
+<span class="cm">// DSU (Disjoint Set Union) cho Kruskal</span>
+<span class="kw">struct</span> DSU {
+    vector&lt;<span class="tp">int</span>&gt; p, rank_;
+    <span class="fn">DSU</span>(<span class="tp">int</span> n) : p(n), rank_(n, <span class="nm">0</span>) { iota(p.begin(), p.end(), <span class="nm">0</span>); }
+    <span class="tp">int</span> <span class="fn">find</span>(<span class="tp">int</span> x) { <span class="kw">return</span> p[x] == x ? x : p[x] = <span class="fn">find</span>(p[x]); }
+    <span class="tp">bool</span> <span class="fn">unite</span>(<span class="tp">int</span> a, <span class="tp">int</span> b) {
+        a = <span class="fn">find</span>(a); b = <span class="fn">find</span>(b);
+        <span class="kw">if</span> (a == b) <span class="kw">return false</span>;
+        <span class="kw">if</span> (rank_[a] < rank_[b]) swap(a, b);
+        p[b] = a; <span class="kw">if</span>(rank_[a]==rank_[b]) rank_[a]++;
+        <span class="kw">return true</span>;
+    }
+};</code></pre>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-label">Bài tập</div><div class="divider-line"></div></div>
+  <div class="problems">
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">GR-01</span>
+        <span class="prob-title">Số thành phần liên thông</span>
+        <div class="prob-tags"><span class="tag">DFS/BFS</span><span class="tag">DSU</span></div>
+        <span class="diff d1">★ Dễ</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho đồ thị vô hướng N đỉnh, M cạnh. Đếm số thành phần liên thông. (N ≤ 10⁵, M ≤ 2×10⁵)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Cách 1: DFS/BFS từ mỗi đỉnh chưa thăm, đếm số lần khởi động. Cách 2: DSU — ban đầu N thành phần, mỗi khi unite thành công, giảm 1.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">GR-02</span>
+        <span class="prob-title">Đường đi ngắn nhất trong mê cung</span>
+        <div class="prob-tags"><span class="tag">BFS</span><span class="tag">Grid</span></div>
+        <span class="diff d1">★ Dễ</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho ma trận N×M ký tự ('.': đi được, '#': tường). Tìm đường đi ngắn nhất (số bước) từ 'S' đến 'E'. Di chuyển 4 hướng. (N, M ≤ 1000)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">BFS chuẩn trên lưới. Mảng dist[N][M] lưu khoảng cách từ S. BFS đảm bảo đường đi tìm được là ngắn nhất (do mọi cạnh có trọng số 1).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">GR-03</span>
+        <span class="prob-title">Đường đi ngắn nhất có trọng số — Dijkstra</span>
+        <div class="prob-tags"><span class="tag">Dijkstra</span><span class="tag">Heap</span></div>
+        <span class="diff d2">★★ TB</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho đồ thị có hướng N đỉnh, M cạnh có trọng số dương. Tìm đường đi ngắn nhất từ đỉnh 1 đến đỉnh N. In ra đường đi. (N ≤ 10⁵, M ≤ 3×10⁵)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Dijkstra với min-heap. Lưu mảng <code>par[v]</code> để trace lại đường đi. Khi relax cạnh (u→v), nếu cập nhật được dist[v], đặt par[v] = u.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">GR-04</span>
+        <span class="prob-title">Cây khung nhỏ nhất — Kruskal</span>
+        <div class="prob-tags"><span class="tag">MST</span><span class="tag">DSU</span></div>
+        <span class="diff d2">★★ TB</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho đồ thị vô hướng liên thông N đỉnh, M cạnh có trọng số. Tìm cây khung nhỏ nhất. (N ≤ 10⁵, M ≤ 2×10⁵)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Kruskal: sắp xếp cạnh theo trọng số tăng dần, lần lượt thêm cạnh nhỏ nhất vào MST nếu không tạo chu trình (kiểm tra bằng DSU). Dừng khi có N-1 cạnh.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">GR-05</span>
+        <span class="prob-title">Kiểm tra đồ thị hai phía (Bipartite)</span>
+        <div class="prob-tags"><span class="tag">BFS</span><span class="tag">Tô màu</span></div>
+        <span class="diff d2">★★ TB</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho đồ thị vô hướng N đỉnh M cạnh. Kiểm tra xem đồ thị có phải là đồ thị hai phía không (có thể tô 2 màu sao cho 2 đỉnh kề khác màu).</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">BFS tô màu: tô đỉnh nguồn màu 0. Khi duyệt BFS, hàng xóm chưa tô → tô màu ngược lại. Hàng xóm đã tô cùng màu → không phải bipartite.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">GR-06</span>
+        <span class="prob-title">Sắp xếp topo & phát hiện chu trình</span>
+        <div class="prob-tags"><span class="tag">Topo Sort</span><span class="tag">Kahn's</span></div>
+        <span class="diff d2">★★ TB</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho N môn học. Một số môn có tiên quyết (phải học A trước B). Tìm thứ tự học thỏa mãn tất cả ràng buộc, hoặc báo "không thể" nếu có chu trình phụ thuộc.</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Kahn's algorithm (BFS topo): tính in-degree mỗi đỉnh. Queue chứa các đỉnh có in-degree = 0. Lần lượt lấy đỉnh u ra, giảm in-degree các hàng xóm. Nếu thứ tự topo có ít hơn N đỉnh → có chu trình.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ CH7: CẤU TRÚC DỮ LIỆU ══════════════ -->
+<section class="chapter ch7" id="ch7">
+  <div class="chapter-head">
+    <div class="chapter-num">Chuyên đề 07</div>
+    <h2>Cấu trúc dữ liệu nâng cao<small>BIT · Segment Tree · Stack · Monotone Queue</small></h2>
+  </div>
+
+  <div class="theory">
+    <div class="theory-title">So sánh các cấu trúc</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>CTDL</th><th>Cập nhật</th><th>Truy vấn</th><th>Ứng dụng chính</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Fenwick Tree (BIT)</strong></td><td><code>O(log N)</code></td><td><code>O(log N)</code></td><td>Tổng prefix, đếm</td></tr>
+          <tr><td><strong>Segment Tree</strong></td><td><code>O(log N)</code></td><td><code>O(log N)</code></td><td>Min/Max/Sum đoạn, lazy</td></tr>
+          <tr><td><strong>Sparse Table</strong></td><td><code>O(N log N)</code></td><td><code>O(1)</code></td><td>RMQ tĩnh</td></tr>
+          <tr><td><strong>Monotone Stack</strong></td><td><code>O(N)</code> total</td><td>—</td><td>Histogram lớn nhất, NGE</td></tr>
+          <tr><td><strong>Monotone Deque</strong></td><td><code>O(N)</code> total</td><td>—</td><td>Sliding window max/min</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-bar"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">C++ · BIT + Segment Tree</span></div>
+    <pre><code><span class="cm">// Fenwick Tree (Binary Indexed Tree)</span>
+<span class="kw">struct</span> BIT {
+    vector&lt;<span class="tp">int</span>&gt; tree;
+    <span class="tp">int</span> n;
+    <span class="fn">BIT</span>(<span class="tp">int</span> n) : n(n), tree(n+<span class="nm">1</span>, <span class="nm">0</span>) {}
+    <span class="kw">void</span> <span class="fn">update</span>(<span class="tp">int</span> i, <span class="tp">int</span> v){ <span class="kw">for</span>(;i<=n;i+=i&-i) tree[i]+=v; }
+    <span class="tp">int</span>  <span class="fn">query</span>(<span class="tp">int</span> i){ <span class="tp">int</span> s=<span class="nm">0</span>; <span class="kw">for</span>(;i><span class="nm">0</span>;i-=i&-i) s+=tree[i]; <span class="kw">return</span> s; }
+    <span class="tp">int</span>  <span class="fn">query</span>(<span class="tp">int</span> l, <span class="tp">int</span> r){ <span class="kw">return</span> <span class="fn">query</span>(r)-<span class="fn">query</span>(l-<span class="nm">1</span>); }
+};
+
+<span class="cm">// Segment Tree (Sum, lazy add)</span>
+<span class="kw">struct</span> SegTree {
+    <span class="tp">int</span> n;
+    vector&lt;<span class="tp">long long</span>&gt; tree, lazy;
+    <span class="fn">SegTree</span>(<span class="tp">int</span> n) : n(n), tree(<span class="nm">4</span>*n,<span class="nm">0</span>), lazy(<span class="nm">4</span>*n,<span class="nm">0</span>) {}
+    <span class="kw">void</span> <span class="fn">push</span>(<span class="tp">int</span> node, <span class="tp">int</span> l, <span class="tp">int</span> r) {
+        <span class="kw">if</span>(lazy[node]){
+            <span class="tp">int</span> m=(l+r)/<span class="nm">2</span>;
+            tree[<span class="nm">2</span>*node] += lazy[node]*(m-l+<span class="nm">1</span>);
+            tree[<span class="nm">2</span>*node+<span class="nm">1</span>] += lazy[node]*(r-m);
+            lazy[<span class="nm">2</span>*node] += lazy[node];
+            lazy[<span class="nm">2</span>*node+<span class="nm">1</span>] += lazy[node];
+            lazy[node] = <span class="nm">0</span>;
+        }
+    }
+    <span class="kw">void</span> <span class="fn">update</span>(<span class="tp">int</span> node,<span class="tp">int</span> l,<span class="tp">int</span> r,<span class="tp">int</span> ql,<span class="tp">int</span> qr,<span class="tp">long long</span> v){
+        <span class="kw">if</span>(qr<l||r<ql) <span class="kw">return</span>;
+        <span class="kw">if</span>(ql<=l&&r<=qr){ tree[node]+=v*(r-l+<span class="nm">1</span>); lazy[node]+=v; <span class="kw">return</span>; }
+        <span class="fn">push</span>(node,l,r); <span class="tp">int</span> m=(l+r)/<span class="nm">2</span>;
+        <span class="fn">update</span>(<span class="nm">2</span>*node,l,m,ql,qr,v); <span class="fn">update</span>(<span class="nm">2</span>*node+<span class="nm">1</span>,m+<span class="nm">1</span>,r,ql,qr,v);
+        tree[node]=tree[<span class="nm">2</span>*node]+tree[<span class="nm">2</span>*node+<span class="nm">1</span>];
+    }
+};</code></pre>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-label">Bài tập</div><div class="divider-line"></div></div>
+  <div class="problems">
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">DS-01</span>
+        <span class="prob-title">Histogram — hình chữ nhật lớn nhất</span>
+        <div class="prob-tags"><span class="tag">Monotone Stack</span></div>
+        <span class="diff d3">★★★ Khó</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho histogram N cột, cột i có chiều cao h[i]. Tìm diện tích hình chữ nhật lớn nhất nằm trong histogram. (LeetCode 84, N ≤ 10⁵)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Stack đơn điệu tăng. Khi gặp cột nhỏ hơn đỉnh stack, pop và tính diện tích: chiều cao = h[popped], chiều rộng = i - stack.top() - 1. Đây là bài toán classic về monotone stack.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">DS-02</span>
+        <span class="prob-title">Next Greater Element cho mọi phần tử</span>
+        <div class="prob-tags"><span class="tag">Monotone Stack</span></div>
+        <span class="diff d2">★★ TB</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho mảng N phần tử. Với mỗi phần tử, tìm phần tử lớn hơn đầu tiên ở bên phải. Nếu không có, trả về -1. Yêu cầu O(N).</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Duyệt từ phải sang trái. Dùng stack: bỏ các phần tử ≤ a[i] ra khỏi stack. Đỉnh stack hiện tại là NGE của a[i]. Push a[i] vào stack.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">DS-03</span>
+        <span class="prob-title">Tổng đoạn và cập nhật điểm — BIT</span>
+        <div class="prob-tags"><span class="tag">BIT</span><span class="tag">Fenwick Tree</span></div>
+        <span class="diff d2">★★ TB</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho mảng N phần tử. Xử lý Q truy vấn: (1) Cộng v vào a[i]; (2) Tính tổng a[l..r]. (N, Q ≤ 3×10⁵)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Dùng BIT (Fenwick Tree). Update: O(log N). Query tổng [l,r] = query(r) - query(l-1): O(log N). Đây là ứng dụng cơ bản nhất của BIT.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">DS-04</span>
+        <span class="prob-title">Min đoạn và cập nhật đoạn — Segment Tree Lazy</span>
+        <div class="prob-tags"><span class="tag">Segment Tree</span><span class="tag">Lazy Propagation</span></div>
+        <span class="diff d4">★★★★ Rất khó</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Cho mảng N phần tử. Xử lý Q truy vấn: (1) Cộng v vào tất cả a[l..r]; (2) Tìm min của a[l..r]. (N, Q ≤ 3×10⁵)</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Segment Tree với <strong>lazy propagation</strong>. Lưu lazy[node] = giá trị cần cộng thêm cho toàn bộ đoạn node quản lý. Khi cần truy cập con, push lazy xuống trước (push down).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem" onclick="toggle(this)">
+      <div class="problem-header">
+        <span class="prob-id">DS-05</span>
+        <span class="prob-title">Xếp hộp theo mức ưu tiên</span>
+        <div class="prob-tags"><span class="tag">Priority Queue</span></div>
+        <span class="diff d1">★ Dễ</span>
+        <span class="chevron">›</span>
+      </div>
+      <div class="problem-body">
+        <div class="prob-section">
+          <div class="prob-section-title">Đề bài</div>
+          <p>Có N nhiệm vụ đến lần lượt. Nhiệm vụ có thể đến hoặc hoàn thành. Tại mỗi thời điểm rảnh, thực hiện nhiệm vụ có độ ưu tiên cao nhất còn trong hàng đợi.</p>
+        </div>
+        <div class="prob-section">
+          <div class="prob-section-title">Gợi ý</div>
+          <div class="hint">Dùng <code>priority_queue&lt;pair&lt;int,int&gt;&gt;</code> (max-heap). Khi có nhiệm vụ mới, push vào. Khi rảnh, pop nhiệm vụ có ưu tiên cao nhất. Xử lý các sự kiện theo thứ tự thời gian.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- STRATEGY OVERVIEW -->
+  <div class="divider"><div class="divider-line"></div><div class="divider-label">Chiến lược thi đấu</div><div class="divider-line"></div></div>
+
+  <div class="strategy-grid">
+    <div class="strategy-card">
+      <div class="s-title">Phân bổ thời gian</div>
+      <p>Đọc đề tất cả bài trước (10 phút). Làm bài dễ nhất trước để lấy điểm. Dành 40% thời gian cho bài khó nhất. Giữ lại 10 phút để debug và kiểm tra.</p>
+    </div>
+    <div class="strategy-card">
+      <div class="s-title">Checklist trước khi nộp</div>
+      <p>Kiểm tra overflow (dùng long long). Test edge case (N=1, N=MAX). Đọc lại output format. Kiểm tra time limit với N lớn nhất.</p>
+    </div>
+    <div class="strategy-card">
+      <div class="s-title">Template khởi đầu</div>
+      <p>Luôn bắt đầu với: <code>#include &lt;bits/stdc++.h&gt;</code>, <code>using namespace std;</code>, <code>typedef long long ll;</code>. Chuẩn bị sẵn các template DSU, BIT, Dijkstra.</p>
+    </div>
+    <div class="strategy-card">
+      <div class="s-title">Nhận diện bài toán nhanh</div>
+      <p>"Tổng đoạn, nhiều truy vấn" → BIT/Segment Tree. "Đường ngắn nhất" → Dijkstra/BFS. "Tất cả tập con" → Bitmask DP. "Luôn chọn tốt nhất" → Greedy hoặc Priority Queue.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:28px">
+    <div class="theory">
+      <div class="theory-title">Mức độ trọng tâm theo đề thi Tin học trẻ tỉnh Lào Cai lớp 10</div>
+      <div class="prog-section">
+        <div class="prog-item"><span class="prog-label">Toán số học (số nguyên tố, GCD, modular)</span><div class="prog-bar"><div class="prog-fill" style="width:90%;background:var(--c1)"></div></div><span class="prog-pct">90%</span></div>
+        <div class="prog-item"><span class="prog-label">Xử lý mảng (prefix sum, two pointers)</span><div class="prog-bar"><div class="prog-fill" style="width:85%;background:var(--c3)"></div></div><span class="prog-pct">85%</span></div>
+        <div class="prog-item"><span class="prog-label">Quy hoạch động cơ bản (LIS, knapsack, LCS)</span><div class="prog-bar"><div class="prog-fill" style="width:80%;background:var(--c4)"></div></div><span class="prog-pct">80%</span></div>
+        <div class="prog-item"><span class="prog-label">Đồ thị (BFS, DFS, Dijkstra)</span><div class="prog-bar"><div class="prog-fill" style="width:75%;background:var(--c6)"></div></div><span class="prog-pct">75%</span></div>
+        <div class="prog-item"><span class="prog-label">Tìm kiếm nhị phân on answer</span><div class="prog-bar"><div class="prog-fill" style="width:70%;background:var(--c2)"></div></div><span class="prog-pct">70%</span></div>
+        <div class="prog-item"><span class="prog-label">Thuật toán tham lam</span><div class="prog-bar"><div class="prog-fill" style="width:65%;background:var(--c5)"></div></div><span class="prog-pct">65%</span></div>
+        <div class="prog-item"><span class="prog-label">BIT / Segment Tree</span><div class="prog-bar"><div class="prog-fill" style="width:45%;background:var(--c7)"></div></div><span class="prog-pct">45%</span></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  <p>Chuyên đề Tin học trẻ · Lào Cai · Lớp 10 · 2025</p>
+  <p>7 chuyên đề · 42 bài tập · 4 mức độ</p>
+</footer>
+
+<script>
+function toggle(el) {
+  el.classList.toggle('open');
+}
+
+// Active nav on scroll
+const sections = document.querySelectorAll('section[id]');
+const links = document.querySelectorAll('nav a');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      links.forEach(l => l.classList.remove('active'));
+      const a = document.querySelector(`nav a[href="#${e.target.id}"]`);
+      if (a) a.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sections.forEach(s => io.observe(s));
+
+// Animate progress bars on scroll
+const bars = document.querySelectorAll('.prog-fill');
+const barObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.transition = 'width 1s cubic-bezier(.4,0,.2,1)';
+      barObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+bars.forEach(b => {
+  const w = b.style.width;
+  b.style.width = '0';
+  setTimeout(() => barObs.observe(b), 100);
+  b._target = w;
+});
+// re-set after transition
+bars.forEach(b => {
+  b.addEventListener('transitionend', () => {});
+  const orig = b._target;
+  setTimeout(() => { b.style.width = orig; }, 200);
+});
+</script>
+</body>
+</html>
